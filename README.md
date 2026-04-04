@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# AI Resume Fraud Intelligence & ATS Scorer 🚀
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An industrial-grade, full-stack application designed to analyze resumes, detect fabricated experience, and score ATS compatibility. Built with React, Python/Flask, and Firebase.
 
-## Available Scripts
+## 🌟 Features
+* **24-Module Fraud Detection:** Uses NLP (SpaCy) to detect overlapping dates, skill stuffing, ghost companies, and AI-generated buzzwords.
+* **ATS Scoring Engine:** Evaluates resumes across 10 dimensions (impact, formatting, keywords) to generate an enterprise-grade score.
+* **Secure Authentication:** User and Admin login systems powered by Google Firebase.
+* **Modern UI:** Responsive, accessible, and beautiful interface built with Tailwind CSS and Lucide Icons.
 
-In the project directory, you can run:
+## 🛠️ Tech Stack
+* **Frontend:** React.js, Tailwind CSS
+* **Backend:** Python, Flask, PyPDF2, SpaCy (NLP)
+* **Database & Auth:** Google Firebase (Firestore & Authentication)
 
-### `npm start`
+## 💻 Running the Project Locally
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Follow these steps to get the project running on your own machine.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
+* Node.js (v16 or higher)
+* Python (3.8 or higher)
+* A Firebase Project (for Auth and Firestore)
 
-### `npm test`
+### 1. Clone the Repository
+\`\`\`bash
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+cd YOUR_REPO_NAME
+\`\`\`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2. Frontend Setup (React)
+Open a terminal and navigate to the frontend directory (if separated) or root:
+\`\`\`bash
+# Install dependencies
+npm install
 
-### `npm run build`
+# Create a .env file and add your Firebase credentials
+# REACT_APP_FIREBASE_API_KEY=your_key
+# REACT_APP_FIREBASE_PROJECT_ID=your_id
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Start the development server
+npm start
+\`\`\`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. Backend Setup (Python/Flask)
+Open a new, second terminal and navigate to your backend folder (e.g., `ai-engine`):
+\`\`\`bash
+# Create a virtual environment
+python -m venv venv
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Activate the virtual environment
+# On Windows:
+venv\Scripts\activate
+# On Mac/Linux:
+source venv/bin/activate
 
-### `npm run eject`
+# Install Python dependencies
+pip install -r requirements.txt
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Download the required SpaCy NLP English model
+python -m spacy download en_core_web_sm
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Start the Flask server
+python app.py
+\`\`\`
+*The Flask server should now be running on `http://localhost:5000`.*
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📜 License
+This project is open-source and available under the [MIT License](LICENSE).
