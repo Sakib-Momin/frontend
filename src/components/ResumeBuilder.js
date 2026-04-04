@@ -594,7 +594,7 @@ export default function ResumeBuilder({ user, requireLogin, onBack }) {
     setIsGenerating(true);
     setGenerateMsg("");
     try {
-      const response = await fetch("http://localhost:5000/api/resumes/build", {
+      const response = await fetch("https://ai-engine-x5jb.onrender.com/api/resumes/build", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data, isFresher }),

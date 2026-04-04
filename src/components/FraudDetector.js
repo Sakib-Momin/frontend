@@ -310,7 +310,7 @@ const FraudDetector = ({ user, requireLogin }) => {
     const formData = new FormData();
     formData.append("file", file);
     try {
-      const response = await fetch("http://localhost:5000/analyze", { method:"POST", body:formData });
+      const response = await fetch("https://ai-engine-x5jb.onrender.com/analyze", { method:"POST", body:formData });
       if (response.ok) {
         const result = await response.json();
         setAnalysis(result);

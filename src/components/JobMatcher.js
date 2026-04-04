@@ -310,7 +310,7 @@ const JobMatcher = ({ user, requireLogin, onBuildResume }) => {
     matchData.append("jd_text", jdText);
     
     try {
-      const response = await fetch("http://localhost:5000/match", { method:"POST", body:matchData });
+      const response = await fetch("https://ai-engine-x5jb.onrender.com/match", { method:"POST", body:matchData });
       if (response.ok) {
         const data = await response.json();
         setMatchResult(data);
