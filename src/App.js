@@ -82,6 +82,12 @@ function App() {
       setUserName('');
       setView("fraud"); 
       setIsMobileMenuOpen(false); // Close menu on logout
+      
+      // 🛑 BUG FIX: WIPE THE SAVED RESUME MEMORY ON LOGOUT
+      localStorage.removeItem('resumeBuilderData');
+      localStorage.removeItem('resumeBuilderStep');
+      localStorage.removeItem('resumeBuilderFresher');
+      
     } catch (error) {
       console.error("Error logging out: ", error);
     }

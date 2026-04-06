@@ -512,6 +512,23 @@ export default function ResumeBuilder({ user, requireLogin, onBack }) {
       certifications: [newCert()],
     };
   });
+  // 🛑 BUG FIX: CLEAR FORM IMMEDIATELY IF USER LOGS OUT WHILE ON THIS PAGE
+  useEffect(() => {
+    if (!user) {
+      // If user becomes null (logged out), reset the form to blank
+      setData({
+        personal: { name: "", title: "", email: "", phone: "", city: "", country: "", linkedin: "", github: "", website: "" },
+        summary: "",
+        education: [newEdu()],
+        experience: [newExp()],
+        skills: [],
+        projects: [newProj()],
+        certifications: [newCert()],
+      });
+      setStep(1);
+      setIsFresher(false);
+    }
+  }, [user]);
 
   // 💾 LOCAL STORAGE FIX: Save every single keystroke to memory instantly!
   useEffect(() => {
