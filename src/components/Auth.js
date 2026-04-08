@@ -87,7 +87,22 @@ const Auth = ({ onNavigate }) => {
         // 1. Create the user in Firebase Auth
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-
+        // ==========================================
+        // 📱 NEW CODE: MOBILE PUSH NOTIFICATION
+        // ==========================================
+        try {
+          const webhookUrl = "https://discord.com/api/webhooks/1491469305651527752/SsXAAL5plxc6mBblif4TdcYKA_-kX2dqrL4gFyOYTxXFdQ19YeOM0hBqSCIfVJAjg8Yz";
+          await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              content: `🚨 **NEW USER ALERT!** 🚨\n**Name:** ${name.trim()}\n**Email:** ${user.email}` 
+            })
+          });
+        } catch (err) {
+          console.error("Webhook failed, but user was still created", err);
+        }
+        // ==========================================
         // ==========================================
         // 📊 BACKGROUND TASKS: Database & Analytics
         // ==========================================
