@@ -37,7 +37,7 @@ export default function AboutUs({ user }) {
       try {
         // 1. Define BOTH of your URLs here
         const bugChannelUrl = "https://discord.com/api/webhooks/1491485532440760452/XLRBvSop0tdo9dXwncGzKcq3wi4NFVkEt9OdltU6AGm2Ggs2BD28YPcM_3wmOC_ulKgN"; 
-        const feedbackChannelUrl = "https://discord.com/api/webhooks/1491481593573802206/_OICmaJZs83fWCVGA-dJxWeb3lsDUfh7cOpLqQIm7uQPzy7QduWX3mRdKejJ6tlE0NHG"; // (The one ending in ...E0NHG)
+        const feedbackChannelUrl = "https://discord.com/api/webhooks/1491484675229880533/7qgTSe8rK-C5x9jl3R4IPQDOPA0Hap6Z8LJFVX27kkEiwPNBS_8TDZAFzS4zLK82mAXV"; // (The one ending in ...E0NHG)
         
         // 2. Decide which URL to use based on the toggle switch
         const targetWebhookUrl = feedbackType === 'bug' ? bugChannelUrl : feedbackChannelUrl;
