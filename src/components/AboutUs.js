@@ -36,7 +36,7 @@ export default function AboutUs({ user }) {
       // ==========================================
       try {
         // IMPORTANT: Paste your new Webhook URL for your #bug-reports channel here!
-        const webhookUrl = "https://discord.com/api/webhooks/1491471682194374657/0L96HMCTMSYLXlXQaDtIEvlX4iVzR_Cmf5W_NdgxdzzKTv8zGVTr7nKggMfZzp_H5ObB"; 
+        const webhookUrl = "https://discord.com/api/webhooks/1491481593573802206/_OICmaJZs83fWCVGA-dJxWeb3lsDUfh7cOpLqQIm7uQPzy7QduWX3mRdKejJ6tlE0NHG"; 
         
         // Dynamically change the emoji and title based on what the user selected
         const emoji = feedbackType === 'bug' ? '🐛' : '💡';
