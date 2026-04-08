@@ -71,6 +71,19 @@ const Auth = ({ onNavigate }) => {
           return;
         }
 
+        // ==========================================
+        // 🛑 NEW CODE: DISPOSABLE EMAIL BLOCKER
+        // ==========================================
+        const blockedDomains = ['yopmail.com', 'tempmail.com', '10minutemail.com', 'guerrillamail.com', 'mailinator.com'];
+        const userDomain = email.split('@')[1].toLowerCase();
+        
+        if (blockedDomains.includes(userDomain)) {
+          setError('Disposable or temporary email addresses are not allowed.');
+          setLoading(false);
+          return;
+        }
+        // ==========================================
+
         // 1. Create the user in Firebase Auth
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
