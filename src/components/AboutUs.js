@@ -35,22 +35,29 @@ export default function AboutUs({ user }) {
       // 📱 NEW CODE: MOBILE PUSH NOTIFICATION
       // ==========================================
       try {
-        // IMPORTANT: Paste your new Webhook URL for your #bug-reports channel here!
         const webhookUrl = "https://discord.com/api/webhooks/1491481593573802206/_OICmaJZs83fWCVGA-dJxWeb3lsDUfh7cOpLqQIm7uQPzy7QduWX3mRdKejJ6tlE0NHG"; 
         
-        // Dynamically change the emoji and title based on what the user selected
         const emoji = feedbackType === 'bug' ? '🐛' : '💡';
         const title = feedbackType === 'bug' ? 'NEW BUG REPORT' : 'NEW PLATFORM FEEDBACK';
         
-        await fetch(webhookUrl, {
+        const response = await fetch(webhookUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
             content: `${emoji} **${title}** ${emoji}\n**From:** ${email.trim()}\n**Message:** ${message.trim()}` 
           })
         });
+
+        // 🛑 NEW: Check if Discord specifically rejected the payload
+        if (!response.ok) {
+          const discordError = await response.text();
+          console.error(`Discord Error (${response.status}):`, discordError);
+        } else {
+          console.log("✅ Webhook sent to Discord successfully!");
+        }
+
       } catch (webhookErr) {
-        console.error("Discord Webhook failed, but database save worked", webhookErr);
+        console.error("Network/CORS error preventing webhook:", webhookErr);
       }
       // ==========================================
 
