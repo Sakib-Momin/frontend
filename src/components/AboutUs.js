@@ -31,6 +31,29 @@ export default function AboutUs({ user }) {
         timestamp: serverTimestamp()
       });
       
+      // ==========================================
+      // 📱 NEW CODE: MOBILE PUSH NOTIFICATION
+      // ==========================================
+      try {
+        // IMPORTANT: Paste your new Webhook URL for your #bug-reports channel here!
+        const webhookUrl = "https://discord.com/api/webhooks/1491471682194374657/0L96HMCTMSYLXlXQaDtIEvlX4iVzR_Cmf5W_NdgxdzzKTv8zGVTr7nKggMfZzp_H5ObB"; 
+        
+        // Dynamically change the emoji and title based on what the user selected
+        const emoji = feedbackType === 'bug' ? '🐛' : '💡';
+        const title = feedbackType === 'bug' ? 'NEW BUG REPORT' : 'NEW PLATFORM FEEDBACK';
+        
+        await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            content: `${emoji} **${title}** ${emoji}\n**From:** ${email.trim()}\n**Message:** ${message.trim()}` 
+          })
+        });
+      } catch (webhookErr) {
+        console.error("Discord Webhook failed, but database save worked", webhookErr);
+      }
+      // ==========================================
+
       setSubmitStatus('success');
       setMessage('');
       setTimeout(() => setSubmitStatus(null), 5000);
