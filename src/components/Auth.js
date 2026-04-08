@@ -6,7 +6,8 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   setPersistence,           
-  browserSessionPersistence 
+  browserSessionPersistence,
+  signOut // <--- ADD THIS HERE
 } from 'firebase/auth';
 
 // --- FIRESTORE IMPORTS ---
@@ -137,7 +138,18 @@ const Auth = ({ onNavigate }) => {
         }
         // ==========================================
 
-        setSuccess('Account created successfully! Redirecting...');
+        // 🛑 NEW: FORCE MANUAL LOGIN AFTER REGISTRATION
+        await signOut(auth); // Logs them out immediately so they don't auto-login
+        
+        setSuccess('Registration successful! Please sign in to continue.');
+        setPassword(''); // Clear the password for security
+        setConfirmPassword('');
+        
+        // Wait 3 seconds so they can read the success message, then switch to Login
+        setTimeout(() => {
+          setMode('login');
+          setSuccess('');
+        }, 3000);
         
       } else if (mode === 'login') {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -159,6 +171,14 @@ const Auth = ({ onNavigate }) => {
         } catch (dbError) {
           console.error("Non-critical DB error during login:", dbError);
         }
+        
+        // 🛑 NEW: REDIRECT TO FRAUD DETECTION PAGE AFTER LOGIN
+        setSuccess('Login successful! Redirecting...');
+        setTimeout(() => {
+          if (onNavigate) {
+            onNavigate('fraud'); // Pushes the user to the fraud detection screen
+          }
+        }, 1500);
         
       } else if (mode === 'reset') {
         await sendPasswordResetEmail(auth, email);
