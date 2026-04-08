@@ -35,12 +35,19 @@ export default function AboutUs({ user }) {
       // 📱 NEW CODE: MOBILE PUSH NOTIFICATION
       // ==========================================
       try {
-        const webhookUrl = "https://discord.com/api/webhooks/1491481593573802206/_OICmaJZs83fWCVGA-dJxWeb3lsDUfh7cOpLqQIm7uQPzy7QduWX3mRdKejJ6tlE0NHG"; 
+        // 1. Define BOTH of your URLs here
+        const bugChannelUrl = "https://discord.com/api/webhooks/1491485532440760452/XLRBvSop0tdo9dXwncGzKcq3wi4NFVkEt9OdltU6AGm2Ggs2BD28YPcM_3wmOC_ulKgN"; 
+        const feedbackChannelUrl = "https://discord.com/api/webhooks/1491481593573802206/_OICmaJZs83fWCVGA-dJxWeb3lsDUfh7cOpLqQIm7uQPzy7QduWX3mRdKejJ6tlE0NHG"; // (The one ending in ...E0NHG)
         
+        // 2. Decide which URL to use based on the toggle switch
+        const targetWebhookUrl = feedbackType === 'bug' ? bugChannelUrl : feedbackChannelUrl;
+        
+        // 3. Set the emojis and title
         const emoji = feedbackType === 'bug' ? '🐛' : '💡';
         const title = feedbackType === 'bug' ? 'NEW BUG REPORT' : 'NEW PLATFORM FEEDBACK';
         
-        const response = await fetch(webhookUrl, {
+        // 4. Send the message to the correct URL
+        const response = await fetch(targetWebhookUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
@@ -48,12 +55,11 @@ export default function AboutUs({ user }) {
           })
         });
 
-        // 🛑 NEW: Check if Discord specifically rejected the payload
         if (!response.ok) {
           const discordError = await response.text();
           console.error(`Discord Error (${response.status}):`, discordError);
         } else {
-          console.log("✅ Webhook sent to Discord successfully!");
+          console.log(`✅ Webhook sent successfully to the ${feedbackType} channel!`);
         }
 
       } catch (webhookErr) {
